@@ -41,8 +41,8 @@ imco <- function(files, brain_mask,
     if (!all(ANTsRCore::antsGetSpacing(fileList[[i - 1]]) == ANTsRCore::antsGetSpacing(fileList[[i]]))) {
       stop("Voxel dimensions do not match")
     }
-    if (!all(ANTsRCore::antsGetDirection(fileList[[i - 1]]) == ANTsRCore::antsGetDirection(fileList[[i]]))) {
-      stop("Image directions do not match")
+    #if (!all(ANTsRCore::antsGetDirection(fileList[[i - 1]]) == ANTsRCore::antsGetDirection(fileList[[i]]))) {
+    #  stop("Image directions do not match")
     }
     if (!all(ANTsRCore::antsGetOrigin(fileList[[i - 1]]) == ANTsRCore::antsGetOrigin(fileList[[i]]))) {
       stop("Image origins/locations do not match")
