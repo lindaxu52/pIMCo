@@ -53,9 +53,9 @@ imco <- function(files, brain_mask,
   if (!all(dim(mask) == dim(fileList[[1]]))) {
     stop("Image dimensions do not match the brain mask")
   }
-  if (!all(ANTsRCore::antsGetSpacing(mask) == ANTsRCore::antsGetSpacing(fileList[[1]]))) {
-    stop("Voxel dimensions do not match the brain mask")
-  }
+  #if (!all(ANTsRCore::antsGetSpacing(mask) == ANTsRCore::antsGetSpacing(fileList[[1]]))) {
+  #  stop("Voxel dimensions do not match the brain mask")
+  #}
 
   if (!is.numeric(fwhm)) {
     fwhm <- as.numeric(fwhm)
