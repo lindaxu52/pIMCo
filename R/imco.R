@@ -38,24 +38,24 @@ imco <- function(files, brain_mask,
     if (!all(dim(fileList[[i - 1]]) == dim(fileList[[i]]))) {
       stop("Image dimensions do not match")
     }
-    #if (!all(ANTsRCore::antsGetSpacing(fileList[[i - 1]]) == ANTsRCore::antsGetSpacing(fileList[[i]]))) {
-    #  stop("Voxel dimensions do not match")
-    #}
-    #if (!all(ANTsRCore::antsGetDirection(fileList[[i - 1]]) == ANTsRCore::antsGetDirection(fileList[[i]]))) {
-    #  stop("Image directions do not match")
-    #}
-    #if (!all(ANTsRCore::antsGetOrigin(fileList[[i - 1]]) == ANTsRCore::antsGetOrigin(fileList[[i]]))) {
-    #  stop("Image origins/locations do not match")
-    #}
+    if (!all(ANTsRCore::antsGetSpacing(fileList[[i - 1]]) == ANTsRCore::antsGetSpacing(fileList[[i]]))) {
+      stop("Voxel dimensions do not match")
+    }
+    if (!all(ANTsRCore::antsGetDirection(fileList[[i - 1]]) == ANTsRCore::antsGetDirection(fileList[[i]]))) {
+      stop("Image directions do not match")
+    }
+    if (!all(ANTsRCore::antsGetOrigin(fileList[[i - 1]]) == ANTsRCore::antsGetOrigin(fileList[[i]]))) {
+      stop("Image origins/locations do not match")
+    }
   }
   # Read in brain mask
   mask <- extrantsr::check_ants(brain_mask)
   if (!all(dim(mask) == dim(fileList[[1]]))) {
     stop("Image dimensions do not match the brain mask")
   }
-  #if (!all(ANTsRCore::antsGetSpacing(mask) == ANTsRCore::antsGetSpacing(fileList[[1]]))) {
-  #  stop("Voxel dimensions do not match the brain mask")
-  #}
+  if (!all(ANTsRCore::antsGetSpacing(mask) == ANTsRCore::antsGetSpacing(fileList[[1]]))) {
+    stop("Voxel dimensions do not match the brain mask")
+  }
 
   if (!is.numeric(fwhm)) {
     fwhm <- as.numeric(fwhm)
