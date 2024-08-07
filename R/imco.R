@@ -127,7 +127,8 @@ imco <- function(files, brain_mask,
     mask_indices = mask_indices,
     verbose = verbose,
     prop_miss = prop_miss,
-    pca_type = "global_wcov",
+    #pca_type = "global_wcov",
+    pca_type = "unscaled_wcor",
     use_ratio = use_ratio
   )
 
