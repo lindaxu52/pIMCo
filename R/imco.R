@@ -38,13 +38,16 @@ imco <- function(files, brain_mask,
     if (!all(dim(fileList[[i - 1]]) == dim(fileList[[i]]))) {
       stop("Image dimensions do not match")
     }
-    if (!all(ANTsRCore::antsImage_GetSpacing(fileList[[i - 1]]) == ANTsRCore::antsImage_GetSpacing(fileList[[i]]))) {
+    #if (!all(ANTsRCore::antsImage_GetSpacing(fileList[[i - 1]]) == ANTsRCore::antsImage_GetSpacing(fileList[[i]]))) {
+    if (!all(ANTsR::antsGetSpacing(fileList[[i - 1]]) == ANTsR::antsGetSpacing(fileList[[i]]))) {
       stop("Voxel dimensions do not match")
     }
-    if (!all(ANTsRCore::antsImage_GetDirection(fileList[[i - 1]]) == ANTsRCore::antsImage_GetDirection(fileList[[i]]))) {
+    #if (!all(ANTsRCore::antsImage_GetDirection(fileList[[i - 1]]) == ANTsRCore::antsImage_GetDirection(fileList[[i]]))) {
+    if (!all(ANTsR::antsGetDirection(fileList[[i - 1]]) == ANTsR::antsGetDirection(fileList[[i]]))) {
       stop("Image directions do not match")
     }
-    if (!all(ANTsRCore::antsImage_GetOrigin(fileList[[i - 1]]) == ANTsRCore::antsImage_GetOrigin(fileList[[i]]))) {
+    #if (!all(ANTsRCore::antsImage_GetOrigin(fileList[[i - 1]]) == ANTsRCore::antsImage_GetOrigin(fileList[[i]]))) {
+    if (!all(ANTsR::antsGetOrigin(fileList[[i - 1]]) == ANTsR::antsGetOrigin(fileList[[i]]))) {
       stop("Image origins/locations do not match")
     }
   }
@@ -53,7 +56,8 @@ imco <- function(files, brain_mask,
   if (!all(dim(mask) == dim(fileList[[1]]))) {
     stop("Image dimensions do not match the brain mask")
   }
-  if (!all(ANTsRCore::antsImage_GetSpacing(mask) == ANTsRCore::antsImage_GetSpacing(fileList[[1]]))) {
+  #if (!all(ANTsRCore::antsImage_GetSpacing(mask) == ANTsRCore::antsImage_GetSpacing(fileList[[1]]))) {
+  if (!all(ANTsR::antsGetSpacing(mask) == ANTsR::antsGetSpacing(fileList[[1]]))) {
     stop("Voxel dimensions do not match the brain mask")
   }
 
@@ -82,7 +86,7 @@ imco <- function(files, brain_mask,
 
   # Dimension of each voxel in mm
   #vDims <- ANTsRCore::antsGetSpacing(fileList[[1]])
-  vDims <- ANTsRCore::antsImage_GetSpacing(fileList[[1]])
+  vDims <- ANTsR::antsGetSpacing(fileList[[1]])
 
   nhood_dims <- get_nhood_size(
     fwhm = fwhm,
@@ -103,7 +107,8 @@ imco <- function(files, brain_mask,
   }
   # Neighborhood data from each modality
   mask_indices <- which(as.array(mask) > 0)
-  nhoods <- lapply(fileList, function(x) ANTsRCore::getNeighborhoodInMask(image = x, mask = mask, radius = nhood_dims$v_radius, spatial.info = TRUE))
+  #nhoods <- lapply(fileList, function(x) ANTsRCore::getNeighborhoodInMask(image = x, mask = mask, radius = nhood_dims$v_radius, spatial.info = TRUE))
+  nhoods <- lapply(fileList, function(x) ANTsR::getNeighborhoodInMask(image = x, mask = mask, radius = nhood_dims$v_radius, spatial.info = TRUE))
 
   if (is.null(fwhm) == FALSE) {
     # Check that the dimension from getting neighborhoods is the same as
