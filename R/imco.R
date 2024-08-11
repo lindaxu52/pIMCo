@@ -53,7 +53,7 @@ imco <- function(files, brain_mask,
   if (!all(dim(mask) == dim(fileList[[1]]))) {
     stop("Image dimensions do not match the brain mask")
   }
-  if (!all(ANTsRCore::antsGetSpacing(mask) == ANTsRCore::antsGetSpacing(fileList[[1]]))) {
+  if (!all(ANTsRCore::antsImage_GetSpacing(mask) == ANTsRCore::antsImage_GetSpacing(fileList[[1]]))) {
     stop("Voxel dimensions do not match the brain mask")
   }
 
@@ -81,8 +81,8 @@ imco <- function(files, brain_mask,
   fileList <- lapply(fileList, check_ants)
 
   # Dimension of each voxel in mm
-  vDims <- ANTsRCore::antsGetSpacing(fileList[[1]])
-  #vDims <- ANTsRCore::antsImage_GetSpacing(fileList[[1]])
+  #vDims <- ANTsRCore::antsGetSpacing(fileList[[1]])
+  vDims <- ANTsRCore::antsImage_GetSpacing(fileList[[1]])
 
   nhood_dims <- get_nhood_size(
     fwhm = fwhm,
