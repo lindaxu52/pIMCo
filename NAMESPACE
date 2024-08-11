@@ -2,7 +2,7 @@
 
 export(imco)
 export(make_ants_image)
-#importFrom(ANTsRCore,antsGetSpacing)
+importFrom(ANTsR,antsGetSpacing)
 importFrom(ANTsRCore,antsImage_GetSpacing)
 importFrom(ANTsRCore,AntsImageWrite)
 #importFrom(ANTsRCore,as.antsImage)
