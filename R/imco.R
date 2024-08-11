@@ -44,7 +44,7 @@ imco <- function(files, brain_mask,
     if (!all(ANTsRCore::antsImage_GetDirection(fileList[[i - 1]]) == ANTsRCore::antsImage_GetDirection(fileList[[i]]))) {
       stop("Image directions do not match")
     }
-    if (!all(ANTsRCore::antsGetOrigin(fileList[[i - 1]]) == ANTsRCore::antsGetOrigin(fileList[[i]]))) {
+    if (!all(ANTsRCore::antsImage_GetOrigin(fileList[[i - 1]]) == ANTsRCore::antsImage_GetOrigin(fileList[[i]]))) {
       stop("Image origins/locations do not match")
     }
   }
