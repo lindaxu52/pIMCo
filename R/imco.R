@@ -27,6 +27,7 @@
 #' @importFrom ANTsRCore getNeighborhoodInMask
 #' @importFrom ANTsR antsGetSpacing
 #' @importFrom neurobase zscore_img
+
 imco <- function(files, brain_mask,
                  out_dir = NULL, out_name = NULL,
                  fwhm = 3,
@@ -35,6 +36,7 @@ imco <- function(files, brain_mask,
                  use_ratio = FALSE,
                  return_coupling = FALSE) {
   fileList <- extrantsr::check_ants(files)
+  #checks if input is character, list, nifti, or class antsImage?, where input is character path of image or an object of class antsImage
   for (i in 2:length(files)) {
     if (!all(dim(fileList[[i - 1]]) == dim(fileList[[i]]))) {
       stop("Image dimensions do not match")
@@ -82,10 +84,11 @@ imco <- function(files, brain_mask,
     }
   }
 
+  # Normalizes images
   fileList <- lapply(fileList, neurobase::zscore_img)
   fileList <- lapply(fileList, check_ants)
 
-  # Dimension of each voxel in mm
+  # Dimension of each voxel in x y z (mm)
   #vDims <- ANTsRCore::antsImage_GetSpacing(fileList[[1]])
   vDims <- ANTsR::antsGetSpacing(fileList[[1]])
 
