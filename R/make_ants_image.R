@@ -16,6 +16,7 @@
 make_ants_image <- function(vec, mask_indices, reference) {
   arr <- array(0, dim = dim(reference))
   arr[mask_indices] <- vec
-  x <- ANTsRCore::as.antsImage(arr, reference = reference)
+  # x <- ANTsRCore::as.antsImage(arr, reference = reference)
+  x <- ANTsR::as.antsImage(arr, reference = reference)
   return(x)
 }
