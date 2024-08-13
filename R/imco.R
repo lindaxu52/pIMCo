@@ -140,7 +140,7 @@ imco <- function(files, brain_mask,
   )
 
   if (!return_coupling) {
-    ANTsR::antsImageWrite(coupling, file.path(out_dir, paste0(out_name, "_coupling.nii.gz")))
+    ANTsRCore::antsImageWrite(coupling, file.path(out_dir, paste0(out_name, "_coupling.nii.gz")))
     return(NULL)
   }
   else {
