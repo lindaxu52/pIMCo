@@ -37,10 +37,12 @@ get_nhood_size <- function(fwhm = NULL, vDims = NULL, brainMask, verbose = TRUE)
   # Using 2.35482 which is what FSL uses
   # Note 2.35482 \approx 2*sqrt(2*log(2))
   sigma <- fwhm / 2.35482
+  # convert to NIFTI
   bMaskOro <- extrantsr::ants2oro(brainMask)
   bMaskOro <- bMaskOro * 0
   midVoxel <- floor(dim(bMaskOro) / 2)
   bMaskOro[midVoxel[1], midVoxel[2], midVoxel[3]] <- 1
+  # smoothing 
   sm <- fslr::fslsmooth(bMaskOro, sigma = sigma)
   # AMV implementation
   # Set diam to match vDims x,y,z
