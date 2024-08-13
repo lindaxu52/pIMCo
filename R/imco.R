@@ -24,7 +24,8 @@
 #'     out_name = "subj-1",
 #'     fwhm = 3)
 #' }
-#' @importFrom ANTsRCore antsGetSpacing getNeighborhoodInMask
+#' @importFrom ANTsRCore getNeighborhoodInMask
+#' @importFrom ANTsR antsGetSpacing
 #' @importFrom neurobase zscore_img
 imco <- function(files, brain_mask,
                  out_dir = NULL, out_name = NULL,
@@ -85,7 +86,7 @@ imco <- function(files, brain_mask,
   fileList <- lapply(fileList, check_ants)
 
   # Dimension of each voxel in mm
-  #vDims <- ANTsRCore::antsGetSpacing(fileList[[1]])
+  #vDims <- ANTsRCore::antsImage_GetSpacing(fileList[[1]])
   vDims <- ANTsR::antsGetSpacing(fileList[[1]])
 
   nhood_dims <- get_nhood_size(
