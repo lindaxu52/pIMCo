@@ -24,6 +24,8 @@ imco_pca <- function(files,
                      pca_type = NULL,
                      use_ratio = FALSE) {
   # Restructure to get eigen decomp at each voxel
+  # Takes nhoods (from imco.R, which uses ANTsR::getNeighborhoodInMask (https://rdrr.io/github/ANTsX/ANTsR/man/getNeighborhoodInMask.html) -  
+  # turns scalar image into matrix with rows of center voxels with listed neighbors 
   imgVals <- lapply(nhoods, function(x) x$values)
   bigDf <- rlist::list.rbind(imgVals)
   matList <- lapply(split(bigDf, col(bigDf)),
@@ -96,19 +98,20 @@ imco_pca <- function(files,
     cat(paste("# Coupling coefficient was not calculated for", count_na, "voxels \n"))
   }
 
-  if (verbose) {
-    cat("# Computing weighted PCs \n")
-  }
+  # Compute eigenvectors and eigenvalues of covariance matrix to identify principal components
+  # if (verbose) {
+  #   cat("# Computing weighted PCs \n")
+  # }
 
-  eigen_list <- lapply(wcovList_corrected, function(x) {
-    if (!is.na(x)[1]) {
-      return(eigen(x))
-    } else {
-      return(NA)
-    }
-  })
+  # eigen_list <- lapply(wcovList_corrected, function(x) {
+  #   if (!is.na(x)[1]) {
+  #     return(eigen(x))
+  #   } else {
+  #     return(NA)
+  #   }
+  # })
 
-  rm(wcovList_corrected)
+  # rm(wcovList_corrected)
 
   if (verbose) {
     cat("# Extracting IMCo images \n")
@@ -139,16 +142,17 @@ imco_pca <- function(files,
   #   coupling_vec <- as.vector(unlist(coupling_vec))
   # }
 
-  coupling_vec <- lapply(eigen_list, function(eigen_mat) { # true ratio
-    if (!is.na(eigen_mat)[1]) {
-      eigen_mat$values[1] / sum(eigen_mat$values)
-    }
-    else {
-      return(NA)
-    }
-  })
-  coupling_vec <- as.vector(unlist(coupling_vec))
-
+  # coupling_vec <- lapply(eigen_list, function(eigen_mat) { # true ratio
+  #   if (!is.na(eigen_mat)[1]) {
+  #     eigen_mat$values[1] / sum(eigen_mat$values)
+  #   }
+  #   else {
+  #     return(NA)
+  #   }
+  # })
+  # coupling_vec <- as.vector(unlist(coupling_vec))
+  coupling_vec <- as.vector(unlist(wcovList_corrected))
+                    
   if (!use_ratio) {
     dim <- length(files)
     dim_rat <- dim / (dim - 1)
