@@ -104,6 +104,7 @@ imco_pca <- function(files,
     correlation <- current2[2]
     correlationmatrix[[i]] <- correlation
     if (i == 1) {
+      cat(paste(current2))
       cat(paste(correlation))
       }
   }
