@@ -104,7 +104,7 @@ imco_pca <- function(files,
     correlation <- current2[2]
     correlationmatrix[[i]] <- correlation
     for (i in 1:15) {
-      cat(paste(corelation))
+      cat(paste(correlation))
       }
   }
                     
