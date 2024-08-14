@@ -85,8 +85,8 @@ imco <- function(files, brain_mask,
   }
 
   # Normalizes images
-  fileList <- lapply(fileList, neurobase::zscore_img)
-  fileList <- lapply(fileList, check_ants)
+  # fileList <- lapply(fileList, neurobase::zscore_img)
+  # fileList <- lapply(fileList, check_ants)
 
   # Dimension of each voxel in x y z (mm)
   #vDims <- ANTsRCore::antsImage_GetSpacing(fileList[[1]])
