@@ -98,10 +98,10 @@ imco_pca <- function(files,
     cat(paste("# Coupling coefficient was not calculated for", count_na, "voxels \n"))
   }
 
-  correlationmatrix <- wcovList_corrected
+  correlationmatrix <- vector(mode = "list", length = length(wcovList_corrected))
   for (i in 1:length(wcovList_corrected)) {
     current2 <- wcovList_corrected[[i]]
-    correlation <- wcovList_corrected[[i]]$cor[2]
+    correlation <- current2[2]
     correlationmatrix[[i]] <- correlation
   }
                     
