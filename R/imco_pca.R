@@ -76,8 +76,8 @@ imco_pca <- function(files,
         w <- x[, 1]
         newx <- x[, -1]
         return(stats::cov.wt(newx, wt = w, center = FALSE, cor = T)$cor)
+        cat(paste(stats::cov.wt(newx, wt = w, center = FALSE, cor = T)$cor))
       }
-      cat(paste(wcovList))
       return(NA)
     })
   }
