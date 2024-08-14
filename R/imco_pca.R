@@ -103,6 +103,9 @@ imco_pca <- function(files,
     current2 <- wcovList_corrected[[i]]
     correlation <- current2[2]
     correlationmatrix[[i]] <- correlation
+    for (i in 1:15) {
+      cat(paste(corelation))
+      }
   }
                     
   # Compute eigenvectors and eigenvalues of covariance matrix to identify principal components
