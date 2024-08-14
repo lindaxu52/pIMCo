@@ -98,6 +98,14 @@ imco_pca <- function(files,
     cat(paste("# Coupling coefficient was not calculated for", count_na, "voxels \n"))
   }
 
+  correlationmatrix <- wcovList_corrected
+  for (i in 1:length(wcovList_corrected)) {
+    current2 <- wcovList_corrected[[i]]
+    correlation <- wcovList_corrected[[i]]$cor[2]
+    }
+    correlationmatrix[[i]] <- correlation
+  }
+                    
   # Compute eigenvectors and eigenvalues of covariance matrix to identify principal components
   # if (verbose) {
   #   cat("# Computing weighted PCs \n")
@@ -151,7 +159,7 @@ imco_pca <- function(files,
   #   }
   # })
   # coupling_vec <- as.vector(unlist(coupling_vec))
-  coupling_vec <- as.vector(unlist(wcovList_corrected))
+  coupling_vec <- as.vector(unlist(correlationmatrix))
                     
   if (!use_ratio) {
     dim <- length(files)
