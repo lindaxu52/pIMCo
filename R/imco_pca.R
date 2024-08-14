@@ -161,16 +161,16 @@ imco_pca <- function(files,
   #   }
   # })
   # coupling_vec <- as.vector(unlist(coupling_vec))
-  coupling_vec <- as.vector(unlist(correlationmatrix))
+  correlation_vec <- as.vector(unlist(correlationmatrix))
                     
-  if (!use_ratio) {
-    dim <- length(files)
-    dim_rat <- dim / (dim - 1)
-    coupling_vec <- (coupling_vec - (1 / dim)) * dim_rat
-    coupling_vec <- log(coupling_vec) - log(1 - coupling_vec)
-  }
+  #if (!use_ratio) {
+  #  dim <- length(files)
+  #  dim_rat <- dim / (dim - 1)
+  #  coupling_vec <- (coupling_vec - (1 / dim)) * dim_rat
+  #  coupling_vec <- log(coupling_vec) - log(1 - coupling_vec)
+  #}
 
-  coupling <- make_ants_image(vec = coupling_vec, mask_indices = mask_indices, reference = files[[1]])
+  coupling <- make_ants_image(vec = correlation_vec, mask_indices = mask_indices, reference = files[[1]])
 
   return(coupling)
 }
