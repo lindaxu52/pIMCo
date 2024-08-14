@@ -102,7 +102,6 @@ imco_pca <- function(files,
   for (i in 1:length(wcovList_corrected)) {
     current2 <- wcovList_corrected[[i]]
     correlation <- wcovList_corrected[[i]]$cor[2]
-    }
     correlationmatrix[[i]] <- correlation
   }
                     
