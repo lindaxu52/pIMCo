@@ -75,11 +75,13 @@ imco_pca <- function(files,
       if (!is.na(x)[1]) {
         w <- x[, 1]
         newx <- x[, -1]
-        return(stats::cov.wt(newx, wt = w, center = FALSE, cor = T)$cor)
+        # return(stats::cov.wt(newx, wt = w, center = FALSE, cor = T)$cor)
+        return(stats::cov.wt(newx, wt = w, center = FALSE, cor = T)$cor[2])
       }
       return(NA)
     })
   }
+  cat(paste(wcovList))
 
   # at brain edges, if all voxels in neighborhood in one modality are 0, coupling shouldn't be calculated
   count_na <- 0
@@ -93,7 +95,6 @@ imco_pca <- function(files,
     wcovList_corrected[[i]] <- current
   }
   rm(wcovList, rmnaListCenter)
-  cat(paste(wcovList_corrected))
 
   if (verbose) {
     cat(paste("# Coupling coefficient was not calculated for", count_na, "voxels \n"))
