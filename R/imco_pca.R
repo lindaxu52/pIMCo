@@ -103,7 +103,7 @@ imco_pca <- function(files,
     current2 <- wcovList_corrected[[i]]
     correlation <- current2[2]
     correlationmatrix[[i]] <- correlation
-    for (i in 1:1) {
+    if (i == 1) {
       cat(paste(correlation))
       }
   }
